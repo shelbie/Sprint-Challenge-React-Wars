@@ -1,29 +1,48 @@
 // Write your Character component here
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Card from "./Card"
 
 
-function CharacterComponent(props) {
-
+export default function Character() {
+    const [char, setChar] = useState([]);
   
-
-  return (
-    <>
-    <div>
-      <h1>{props.name}</h1>
-      <p>{props.height}</p>
-      <p>{props.mass}</p>
-      <p>{props.hairColor}</p>
-      <p>{props.skinColor}</p>
-      <p>{props.eyeColor}</p>
-      <p>{props.gender}</p>
-      <p>{props.homeworld}</p>
-      <p>{props.films}</p>
-      <p>{props.species}</p>
-      <p>{props.vehicles}</p>
-      <p>{props.starships}</p>
+    useEffect(() => {
+      axios
+        .get("https://swapi.py4e.com/api/people/1")
+        .then(response => {
+          console.log(response.data);
+        //setChar(response.data);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }, []);
+    
+    return (
+      <div>
+        <ul>
+          {char.map((ch) => {
+            return (
+              <Card
+            
+              name={ch.name}
+            height={ch.height}
+            //   mass={character.mass}
+            //   hairColor={character.hairColor}
+            //   skinColor={character.skinColor}
+            //   eyeColor={character.eyeColor}
+            //   gender={character.gender}
+            //   homeworld={character.homeworld}
+            //   films={character.films}
+            //   species={character.species}
+            //   vehicles={character.vehicles}
+            //   starships={character.starships}
+              />
+            );
+          })}
+        </ul>
       </div>
-    </>
-  );
-}
+    );
+  }
 
-export default CharacterComponent;
