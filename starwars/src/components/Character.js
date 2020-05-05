@@ -1,6 +1,7 @@
 // Write your Character component here
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Card, CardText, CardBody, CardTitle, CardSubtitle } from "reactstrap";
 
 const Character = () => {
   const [char, setChar] = useState();
@@ -17,32 +18,46 @@ const Character = () => {
       });
   }, []);
 
-  if(char) {
-    console.log("data")
- } else {
-    return <div>Loading</div>
- }
+  if (char) {
+    console.log("data");
+  } else {
+    return <div>Loading</div>;
+  }
 
   return (
     <div>
-  {char.map(ch => {
+      {char.map((ch) => {
         return (
           <>
-          <div>
-          <h1>Name: {ch.name}</h1>
-          <h1>Height: {ch.height}cm</h1>
-          <h1>Mass: {ch.mass}kg</h1>
-          <h1>Gender: {ch.gender}</h1>
-          <h1>Films: {ch.films.length}</h1>
-          </div>
+            <div>
+              <Card>
+                <CardBody>
+                  <CardTitle>
+                    <h1>Name: {ch.name}</h1>
+                  </CardTitle>
+                  <CardSubtitle>
+                    <h3>Gender: {ch.gender}</h3>
+                  </CardSubtitle>
+                  <CardSubtitle>
+                    <h3>Height: {ch.height}cm</h3>
+                  </CardSubtitle>
+                  <CardSubtitle>
+                    <h3>Mass: {ch.mass}kg</h3>
+                  </CardSubtitle>
+                  <CardText>
+                    <p>
+                      {ch.name} played in {ch.films.length} films.
+                    </p>
+                  </CardText>
+                </CardBody>
+              </Card>
+            </div>
           </>
-        )
+        );
       })}
     </div>
   );
-}
-
-
+};
 
 export default Character;
 
